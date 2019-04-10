@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p id="demo"></p>
+<script>
+    let Battery = function () {
+        this.setEnergy = function (energy) {
+            return this.energy = energy;
+        };
+        this.getEnergy = function () {
+            return this.energy;
+        };
+        this.decreaseEnergy = function () {
+            if (this.energy > 0){
+                this.energy--;
+            }
+        }
+    }
+
+    let Flashlamp = function () {
+        this.setBattery = function (Battery) {
+            this.battery = Battery;
+        };
+        this.getBatteryInfo = function () {
+            return this.battery.getEnergy();
+        };
+        this.turnON = function () {
+            this.status = true;
+            this.battery.decreaseEnergy();
+        };
+        this.turnOFF = function () {
+            this.status = false;
+            this.battery.decreaseEnergy();
+        };
+        this.light = function () {
+            if (this.status){
+                alert('lighting')
+            } else alert('not lighting');
+        }
+    }
+
+    let pin = new Battery();
+    pin.setEnergy(100);
+    alert(pin.energy);
+
+    let den = new Flashlamp();
+    den.setBattery(pin);
+
+    document.write("Battery info:" + den.getBatteryInfo() + "<br/>");
+    den.light();
+
+    document.write("Turn on<br/>")
+    den.turnON();
+    den.light();
+    document.write("Battery info:" + den.getBatteryInfo() + "<br/>");
+
+    document.write("Turn off<br/>")
+    den.turnOFF();
+    den.light();
+
+</script>
+</body>
+</html>
